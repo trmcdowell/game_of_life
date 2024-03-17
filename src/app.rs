@@ -17,13 +17,13 @@ impl App {
 
 #[derive(Debug)]
 pub struct Universe {
-    cells: Vec<Cell>,
-    height: u32,
-    width: u32,
+    pub cells: Vec<Cell>,
+    pub height: u32,
+    pub width: u32,
 }
 
 impl Universe {
-    fn get_cell_idx(&self, row: u32, column: u32) -> usize {
+    pub fn get_cell_idx(&self, row: u32, column: u32) -> usize {
         (row * self.width + column) as usize
     }
 
@@ -81,8 +81,8 @@ impl Universe {
 impl Default for Universe {
     fn default() -> Universe {
         // These dimensions are just based off of my monitor
-        let height: u32 = 100;
-        let width: u32 = 187;
+        let height: u32 = 40;
+        let width: u32 = 94;
         let mut cells: Vec<Cell> = Vec::new();
         let num_cells = height * width;
         let mut rng = rand::thread_rng();

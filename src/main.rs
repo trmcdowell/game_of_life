@@ -3,7 +3,7 @@ mod ui;
 
 use std::io;
 
-use app::App;
+use app::{App, Universe};
 use crossterm::{
     event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyModifiers},
     execute,
@@ -61,7 +61,8 @@ fn run_app<B: Backend>(terminal: &mut Terminal<B>, app: &mut App) -> anyhow::Res
                     }
                 }
                 KeyCode::Esc | KeyCode::Char('q') | KeyCode::Char('Q') => return Ok(()),
-                KeyCode::Char('f') => app.universe.tick(),
+                KeyCode::Char('f') | KeyCode::Char(' ') => app.universe.tick(),
+                KeyCode::Char('r') => app.universe = Universe::default(),
                 _ => {}
             }
         }
