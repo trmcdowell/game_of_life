@@ -1,5 +1,3 @@
-use std::fmt;
-
 use rand::Rng;
 
 #[derive(Debug)]
@@ -100,22 +98,6 @@ impl Default for Universe {
             width,
             cells,
         }
-    }
-}
-
-impl fmt::Display for Universe {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        for row in self.cells.chunks(self.width as usize) {
-            for cell in row {
-                let cell_str = match cell {
-                    Cell::Alive => "◼",
-                    Cell::Dead => " ",
-                };
-                write!(f, "{}", cell_str)?;
-            }
-            writeln!(f)?;
-        }
-        Ok(())
     }
 }
 
