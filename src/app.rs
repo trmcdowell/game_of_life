@@ -79,7 +79,7 @@ impl Universe {
 impl Default for Universe {
     fn default() -> Universe {
         // These dimensions are just based off of my monitor
-        let height: u32 = 40;
+        let height: u32 = 41;
         let width: u32 = 94;
         let mut cells: Vec<Cell> = Vec::new();
         let num_cells = height * width;
