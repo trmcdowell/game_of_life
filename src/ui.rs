@@ -1,6 +1,6 @@
 use crate::app::{App, Cell};
 use ratatui::{
-    layout::{Constraint, Layout},
+    layout::{Constraint, Layout, Rect},
     prelude::{Alignment, Frame},
     style::{Color, Style},
     text::{Line, Span},
@@ -8,12 +8,18 @@ use ratatui::{
 };
 
 // Main theme color
-const THEME_COLOR: Color = Color::LightGreen;
+const THEME_COLOR: Color = Color::Cyan;
 
-pub fn ui(frame: &mut Frame, app: &mut App) {
+pub fn ui(app: &mut App, frame: &mut Frame) {
     let layout = Layout::vertical([Constraint::Percentage(95), Constraint::Percentage(5)])
         .split(frame.size());
 
+    // Render widgets
+    render_universe_widget(app, frame, layout[0]);
+    render_command_widget(frame, layout[1]);
+}
+
+fn render_universe_widget(app: &mut App, frame: &mut Frame, area: Rect) {
     let universe_block = Block::bordered()
         .title(" Game of Life ")
         .title_alignment(Alignment::Center)
@@ -38,14 +44,13 @@ pub fn ui(frame: &mut Frame, app: &mut App) {
         lines.push(line);
     }
     let universe_widget = Paragraph::new(lines).block(universe_block);
+    frame.render_widget(universe_widget, area);
+}
 
-    // Build commands widget
+fn render_command_widget(frame: &mut Frame, area: Rect) {
     let command_block = Block::default();
     let command_widget = Paragraph::new("[space] next generation, [r]estart, [q]uit")
         .style(Style::default().fg(THEME_COLOR))
         .block(command_block);
-
-    // Build widgets
-    frame.render_widget(universe_widget, layout[0]);
-    frame.render_widget(command_widget, layout[1]);
+    frame.render_widget(command_widget, area);
 }
