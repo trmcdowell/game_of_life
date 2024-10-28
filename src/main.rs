@@ -45,7 +45,7 @@ fn main() -> anyhow::Result<()> {
 
 fn run_app<B: Backend>(terminal: &mut Terminal<B>, app: &mut App) -> anyhow::Result<()> {
     loop {
-        terminal.draw(|frame| ui(frame, app))?;
+        terminal.draw(|frame| ui(app, frame))?;
 
         // Main app logic
         if let Event::Key(key) = event::read()? {
